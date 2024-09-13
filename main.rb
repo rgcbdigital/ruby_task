@@ -31,37 +31,37 @@ if reply == "delete"
    puts "Which national id would you like to delete?"
    national_id = gets.chomp.to_i
    if person.any? {|h| h[:national_id] == national_id}
-     person = person.reject {|i| i[:national_id] == national_id}
-     puts "Successfully deleted."
-
+      person = person.reject {|i| i[:national_id] == national_id}
+      puts "Successfully deleted."
+      puts person
 
    else puts "User not found."
    end
 end
 
 if reply == "add"
-#print person
+   #print person
 
-puts "What is your national id?"
-national_id = gets.chomp.to_i
+   puts "What is your national id?"
+   national_id = gets.chomp.to_i
 
-if person.any? {|h| h[:national_id] == national_id}
-puts "Failed to add: National ID already exists."
-else
-puts "What is your name?"
-end
+   if person.any? {|h| h[:national_id] == national_id}
+      puts "Failed to add: National ID already exists."
+   else
+      puts "What is your name?"
+   end
 
-name = gets.chomp.to_s
-puts "What is your age?"
-age = gets.chomp.to_i
-
-
-new_user = { national_id: national_id, name: name  , age: age }
-person.insert(0,new_user)
-
-puts "User added successfully!"
+   name = gets.chomp.to_s
+   puts "What is your age?"
+   age = gets.chomp.to_i
 
 
+   new_user = { national_id: national_id, name: name  , age: age }
+   person.insert(0,new_user)
+
+   puts "User added successfully!"
+
+   puts  person
 
 end
 
