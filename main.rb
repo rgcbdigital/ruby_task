@@ -24,15 +24,31 @@ person = [
 
 ]
 
+puts "Would you like to add or remove a user? (Add/Delete)"
+reply = gets.chomp.downcase
+
+if reply == "delete"
+   puts "Which national id would you like to delete?"
+   national_id = gets.chomp.to_i
+   if person.any? {|h| h[:national_id] == national_id}
+     person = person.reject {|i| i[:national_id] == national_id}
+     puts "Successfully deleted."
+
+
+   else puts "User not found."
+   end
+end
+
+if reply == "add"
 #print person
 
 puts "What is your national id?"
 national_id = gets.chomp.to_i
 
 if person.any? {|h| h[:national_id] == national_id}
-  puts "Failed to add: National ID already exists."
+puts "Failed to add: National ID already exists."
 else
-    puts "What is your name?"
+puts "What is your name?"
 end
 
 name = gets.chomp.to_s
@@ -45,8 +61,9 @@ person.insert(0,new_user)
 
 puts "User added successfully!"
 
-puts person
 
+
+end
 
 
 
