@@ -30,13 +30,17 @@ reply = gets.chomp.downcase
 if reply == "delete"
    puts "Which national id would you like to delete?"
    national_id = gets.chomp.to_i
+
    if person.any? {|h| h[:national_id] == national_id}
       person = person.reject {|i| i[:national_id] == national_id}
       puts "Successfully deleted."
       puts person
 
-   else puts "User not found."
+   else
+     puts "User not found."
+
    end
+
 end
 
 if reply == "add"
