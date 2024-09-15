@@ -27,7 +27,7 @@ person = [
 continue = true
 
 while continue
-   puts "Would you like to add, remove, search, or type 'exit' to exit? (Add/Delete/Search/Exit)"
+   puts "Would you like to add, remove, search, edit a user or type 'exit' to exit? (Add/Delete/Search/Exit)"
    reply = gets.chomp.downcase
 
    case reply
@@ -90,6 +90,32 @@ while continue
 
       if found_person
          puts "Person found: National ID: #{found_person[:national_id]}, Name: #{found_person[:name]}, Age: #{found_person[:age]}"
+      else
+         puts "User not found."
+      end
+
+   when "edit"
+      puts "Enter the national id of the person you want to edit:"
+      national_id = gets.chomp.to_i
+      found_person = person.find { |p| p[:national_id] == national_id }
+
+      if found_person
+         puts "Editing Person: National ID: #{found_person[:national_id]}, Name: #{found_person[:name]}, Age: #{found_person[:age]}"
+         puts "Enter the new name (or press Enter to keep the current name '#{found_person[:name]}'):"
+         new_name = gets.chomp
+         new_name = found_person[:name] if new_name.empty?
+
+         puts "Enter the new age (or press Enter to keep the current age '#{found_person[:age]}'):"
+         new_age = gets.chomp
+         new_age = found_person[:age] if new_age.empty?
+         new_age = new_age.to_i if new_age != found_person[:age]
+
+         found_person[:name] = new_name
+         found_person[:age] = new_age
+
+         puts "Person updated successfully:"
+         puts person
+
       else
          puts "User not found."
       end
