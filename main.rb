@@ -51,7 +51,7 @@ while continue
       if person.any? { |h| h[:national_id] == national_id }
          person = person.reject { |i| i[:national_id] == national_id }
          puts "Successfully deleted."
-         puts person
+         puts person.last(20)
       else
          puts "User not found."
       end
@@ -94,7 +94,7 @@ while continue
                person.insert(0, new_user)
 
                puts "User added successfully!"
-               puts person
+               puts person.first(20)
             end
 
          end
