@@ -27,77 +27,74 @@ person = [
 continue = true
 
 while continue
-   puts "Would you like to add, remove a user, or type 'exit' to exit? (Add/Delete/Exit)"
+   puts "Would you like to add, remove, search, or type 'exit' to exit? (Add/Delete/Search/Exit)"
    reply = gets.chomp.downcase
 
-   if reply == "exit"
+   case reply
+   when "exit"
       continue = false
       puts "Program stopped."
 
-   elsif reply == "delete"
+   when "delete"
       puts "Which national id would you like to delete?"
       national_id = gets.chomp
-
-
       if national_id == "exit"
          puts "Program stopped."
          break
 
-      else
-         national_id = national_id.to_i
-      end
-
-
-      if person.any? { |h| h[:national_id] == national_id }
+      elsif
+      national_id.to_i
+         person.any? { |h| h[:national_id] == national_id }
          person = person.reject { |i| i[:national_id] == national_id }
          puts "Successfully deleted."
-         puts person.last(20)
+
+      else
+         puts "User not found."
+      end
+      puts person.last(20)
+
+   when "add"
+      puts "What is your national id?"
+      national_id = gets.chomp.to_i
+
+      if person.any? { |h| h[:national_id] == national_id }
+         puts "Failed to add: National ID already exists."
+      else
+         puts "What is your name?"
+         name = gets.chomp
+
+         if name == "exit"
+            puts "Program stopped."
+            break
+         else
+            puts "What is your age?"
+            age = gets.chomp
+            if age == "exit"
+               puts "Program stopped."
+               break
+            else
+               age = age.to_i
+
+            new_user = { national_id: national_id, name: name, age: age }
+            person.insert(0, new_user)
+            puts "User added successfully!"
+            puts person.first(20)
+            end
+         end
+      end
+
+   when "search"
+      puts "Enter the national id of the person you want to search:"
+      national_id = gets.chomp.to_i
+      found_person = person.find { |p| p[:national_id] == national_id }
+
+      if found_person
+         puts "Person found: National ID: #{found_person[:national_id]}, Name: #{found_person[:name]}, Age: #{found_person[:age]}"
       else
          puts "User not found."
       end
 
-   elsif reply == "add"
-      puts "What is your national id?"
-      national_id = gets.chomp
-
-      if national_id == "exit"
-         puts "Program stopped."
-         break
-
-      else
-         national_id = national_id.to_i
-      end
-
-      if person.any? { |h| h[:national_id] == national_id }
-         puts "Failed to add: National ID already exists."
-
-      else
-         puts "What is your name?"
-         name = gets.chomp
-         if name == "exit"
-            puts "Program stopped."
-            break
-
-
-         else
-            puts "What is your age?"
-            age = gets.chomp
-
-            if age == "exit"
-               puts "Program stopped."
-               break
-
-            else
-               age = age.to_i
-
-               new_user = { national_id: national_id, name: name, age: age }
-               person.insert(0, new_user)
-
-               puts "User added successfully!"
-               puts person.first(20)
-            end
-
-         end
-      end
+   else
+      puts "That seems to be invalid. Please try again."
    end
 end
