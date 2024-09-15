@@ -32,26 +32,26 @@ while continue
 
    case reply
    when "exit"
-      continue = false
-      puts "Program stopped."
+         puts "Are you sure you want to exit (y/n)?"
+         response = gets.chomp.downcase
+
+         if response == "y" || response == "yes"
+         continue = false
+         puts "Program stopped."
+         end
 
    when "delete"
       puts "Which national id would you like to delete?"
-      national_id = gets.chomp
-      if national_id == "exit"
-         puts "Program stopped."
-         break
+      national_id = gets.chomp.to_i
 
-      elsif
-      national_id.to_i
-         person.any? { |h| h[:national_id] == national_id }
+      if person.any? { |h| h[:national_id] == national_id }
          person = person.reject { |i| i[:national_id] == national_id }
          puts "Successfully deleted."
-
+         puts person.last(20)
       else
          puts "User not found."
+
       end
-      puts person.last(20)
 
    when "add"
       puts "What is your national id?"
@@ -68,18 +68,11 @@ while continue
             break
          else
             puts "What is your age?"
-            age = gets.chomp
-            if age == "exit"
-               puts "Program stopped."
-               break
-            else
-               age = age.to_i
-
+            age = gets.chomp.to_i
             new_user = { national_id: national_id, name: name, age: age }
             person.insert(0, new_user)
             puts "User added successfully!"
             puts person.first(20)
-            end
          end
       end
 
@@ -115,12 +108,12 @@ while continue
 
          puts "Person updated successfully:"
          puts person
-
       else
          puts "User not found."
       end
 
-   else
-      puts "That seems to be invalid. Please try again."
+   else puts "That seems to be invalid. Please try again."
+
    end
+
 end
