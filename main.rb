@@ -2,7 +2,6 @@
 #```ruby
 # ```
 
-
 person = [
   { national_id: 1, name: "Edward", age: 18 },
   { national_id: 2, name: "Mark", age: 19 },
@@ -29,11 +28,9 @@ person = [
 $continue = true
 while $continue
 
-
 def start
   puts "Would you like to add, remove, search, edit a user or type 'exit' to exit? (Add/Delete/Search/Edit/Exit)"
 end
-
 def exit_program
   puts "Are you sure you want to exit (y/n)?"
   reply = gets.chomp.downcase
@@ -43,7 +40,6 @@ def exit_program
     puts "I see, let's go back."
   end
 end
-
 def delete(person)
   puts "Which national id would you like to delete?"
   national_id = gets.chomp.to_i
@@ -56,7 +52,6 @@ def delete(person)
     puts "User not found."
   end
 end
-
 def add(person)
   puts "What is your national id?"
   national_id = gets.chomp.to_i
@@ -72,11 +67,8 @@ def add(person)
     person.insert(0, new_user)
     puts "User added successfully!"
     puts person.first(20)
-
   end
-  return true
 end
-
 def search(person)
   puts "Enter the national id of the person you want to search:"
   national_id = gets.chomp.to_i
@@ -88,7 +80,6 @@ def search(person)
     puts "User not found."
   end
 end
-
 def edit(person)
   puts "Enter the national id of the person you want to edit:"
   national_id = gets.chomp.to_i
@@ -104,17 +95,14 @@ def edit(person)
     new_age = gets.chomp
     new_age = found_person[:age] if new_age.empty?
     new_age = new_age.to_i if new_age != found_person[:age]
-
     found_person[:name] = new_name
     found_person[:age] = new_age
-
     puts "Person updated successfully:"
     puts person
   else
     puts "User not found."
   end
 end
-
 
   sleep(1)
   puts person.first(5)
