@@ -1,6 +1,22 @@
 class Records
   attr_accessor :national_id, :name, :age
 
+  def initialize(national_id, name, age)
+    @national_id = national_id
+    @name = name
+    @age = age
+  end
+
+  @@records = []
+  def save
+    @@records.prepend(self)
+  end
+
+  def self.all
+    @@records
+  end
+end
+
   people = [
     { national_id: 1, name: "Edward", age: 18 },
     { national_id: 2, name: "Mark", age: 19 },
@@ -25,9 +41,9 @@ class Records
   ]
 
   people.each do |person|
-    new_person = Records.new
-    new_person.name = person[:name]
-    new_person.national_id = person[:national_id]
-    new_person.age = person[:age]
+    new_person = Records.new(person[:national_id], person[:name], person[:age])
+    new_person.save
   end
-end
+records = Records
+p records.all
+
